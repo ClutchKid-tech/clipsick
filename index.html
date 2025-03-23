@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipSick – ClutchKid-Tech’s Gaming Hub</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #141414; color: #fff; text-align: center; margin: 0; padding: 0; }
+        .header { background-color: #ff0066; padding: 20px; font-size: 30px; font-weight: bold; }
+        .content { padding: 40px; }
+        .subscribe-btn { background-color: #00cccc; color: #000; padding: 15px 40px; border: none; font-size: 20px; cursor: pointer; border-radius: 5px; }
+        .subscribe-btn:hover { background-color: #00b3b3; }
+        .features { margin: 20px 0; font-size: 18px; }
+        .upload-note { font-size: 16px; color: #ccc; }
+        .upload-form { margin: 40px 0; }
+        .upload-form input, .upload-form textarea { display: block; margin: 10px auto; padding: 10px; width: 80%; max-width: 400px; background: #222; color: #fff; border: 1px solid #00cccc; border-radius: 5px; }
+        .clips-section { margin: 40px 0; }
+        .clip { background: #222; padding: 20px; margin: 20px auto; max-width: 600px; border-radius: 5px; }
+        .clip iframe { width: 100%; height: 315px; border: none; }
+    </style>
+</head>
+<body>
+    <div class="header">ClipSick – ClutchKid-Tech’s Gaming Hub</div>
+    <div class="content">
+        <h1>Flex Your Sickest Gaming Clips!</h1>
+        <p>ClipSick: ClutchKid-Tech’s hub for teen gamers to drop epic wins and clutch moments. Upload free or unlock premium perks to flex harder.</p>
+        <div class="features">
+            <p>✔ Free to upload and watch clips</p>
+            <p>✔ Premium: Get featured, edit tools, and contest entry</p>
+            <p>✔ Built for gamers, by a gamer</p>
+        </div>
+        <button class="subscribe-btn" onclick="alert('Premium signup coming soon!')">Go Premium</button>
+        <p class="upload-note">Uploads live—submit your clips below!</p>
+
+        <!-- Upload Form with EmailJS -->
+        <div class="upload-form">
+            <h2>Submit Your Clip</h2>
+            <form id="clip-form">
+                <input type="text" name="name" placeholder="Your Gamer Tag" required>
+                <input type="url" name="video-link" placeholder="Paste YouTube/Twitch Link (optional)">
+                <input type="file" name="video-file" accept="video/*" placeholder="Upload Video File (optional)">
+                <textarea name="description" placeholder="Tell us about your clip!" rows="4" required></textarea>
+                <button type="submit" class="subscribe-btn">Submit Clip</button>
+            </form>
+        </div>
+
+        <!-- Featured Clips Section -->
+        <div class="clips-section">
+            <h2>Featured Clips</h2>
+            <div class="clip">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                <p><strong>ClutchKid-Tech</strong>: "First test clip—Rickroll for the win!"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your Public Key
+        })();
+
+        document.getElementById('clip-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                videoLink: formData.get('video-link'),
+                description: formData.get('description')
+            };
+
+            const file = formData.get('video-file');
+            if (file && file.size > 0) {
+                alert('File uploads coming soon—use a link for now!');
+                return;
+            }
+
+            emailjs.send('service_ujfigw2', 'template_ykmd2t8', data)
+                .then(() => {
+                    window.location.href = 'https://clutchkid-tech.github.io/clipsick/thanks.html';
+                }, (error) => {
+                    alert('Oops! Submission failed: ' + error.text);
+                });
+        });
+    </script>
+</body>
+</html>
