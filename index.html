@@ -37,6 +37,7 @@
             <h2>Submit Your Clip</h2>
             <form id="clip-form">
                 <input type="text" name="name" placeholder="Your Gamer Tag" required>
+                <input type="email" name="email" placeholder="Your Email (for a thank you!)" required>
                 <input type="url" name="video-link" placeholder="Paste YouTube/Twitch Link (optional)">
                 <input type="file" name="video-file" accept="video/*" placeholder="Upload Video File (optional)">
                 <textarea name="description" placeholder="Tell us about your clip!" rows="4" required></textarea>
@@ -67,6 +68,7 @@
             const formData = new FormData(this);
             const data = {
                 name: formData.get('name'),
+                email: formData.get('email'), // Added email field
                 videoLink: formData.get('video-link'),
                 description: formData.get('description')
             };
